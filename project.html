@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+
+            font-family: Arial, sans-serif;
+            
+        }
+        .main {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+        }
+        .navbar {
+            width: 86%;
+            display: flex;
+            margin: auto;
+            padding: 15px;
+            align-items: center;
+            justify-content: space-between;
+            position: relative; /* Allow absolute positioning within */
+        }
+        ul {
+            margin-top: 20px;
+            margin-left: auto;
+        }
+        ul li {
+            list-style: none;
+            display: inline-block;
+            padding: 10px;
+        }
+        ul li a {
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            color: darkslategray;
+        }
+        ul li a:hover { 
+            color: red;
+        }
+        .info {
+            margin-left: 10%;
+            margin-top: 10%;
+            margin-bottom: 50px; /* Space for education section */
+        }
+        .info h1 {
+            font-size: 70px;
+            color: rgb(36,32,30);
+        }
+        .info h3 {
+            font-size: 35px;
+            letter-spacing: 1px;
+            line-height: 24px;
+        }
+        .info span {
+            color: rgb(230, 104,59);
+        }
+        .info a {
+            text-decoration: none;
+            color:white;
+            background: rgb(36, 32,30);
+            margin: 30px 0;
+            padding: 10px;
+            border-radius: 10px;  /* resume */
+            display: inline-block;
+        }
+        .info a:hover {
+            background: rgb(59, 174,209);
+        }
+        .image {
+            width: 20%;
+            height: 70%;
+            position: absolute;
+            right: 250px;
+            bottom: 120px; 
+        }
+        .image img {
+            position: absolute;
+            height: 400px;
+            width: 295px;
+            left: 50%;
+            top: 0;
+        }
+        .education ,.abcd,.efgh{
+            width: 70%;
+            margin: 20px auto; /* Center horizontally and add space from top */
+            padding: 90px;
+            background-color: #f4f4f4;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative; /* Changed from absolute to relative */
+            
+        }
+        .ijkl{
+            width: 30%;
+            margin: 5px auto; /* Center horizontally and add space from top */
+            padding: 40px;
+            background-color: #f4f4f4;
+            border-radius: 3px;
+            box-shadow: black;
+           position: relative;
+        
+        }
+
+        .education h2 {
+            font-size: 36px;
+            color: rgb(36,32,30);
+            margin-bottom: 20px;
+        }
+         .institution {
+            margin-bottom: 20px;
+        }
+     .institution h3 {
+            font-size: 24px;
+            color: rgb(36,32,30);
+        }
+         .institution p {
+            font-size: 18px;
+            color: #333;
+        }
+        .welcometext {
+            position: absolute;
+            top: 50%;
+            font-size: 24px;
+            font-weight: bold;
+            color: darkslategray;
+            background-color: linear-gradient(135deg, #f5a623, #f76c6c);;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="navbar">
+            <div class="welcometext">Hey All , Welcome to My Portfolio!<br><br>Let's Connect!</div>
+            <ul>
+                <li><a href="">HOME</a></li>
+                <li><a href="#ab">ABOUT</a></li> 
+                <li><a href="#ef">SKILLS</a></li>
+                <li><a href="#about">EDUCATION</a></li>
+                <li><a href="#ij">CONTACT</a></li>
+            </ul>
+        </div>
+        <div class="info">
+            <h3>Hi, I'm <span>Vijayashalini J</span></h3>
+            <h1><span>S</span>TUDENT</h1>
+            <h3>Passionate Web Developer Specializing In HTML, CSS</h3>
+            <a href="resume\shaliniresume.pdf">Resume</a>
+        </div>
+        <div class="image">
+            <img src="images\resumeimage.jpeg" alt="Profile Image">
+        </div>
+    </div>
+    <section id="ab">
+        <div class="abcd">
+            <h2 class="ad">About me</h2>
+                <p style="font-family:'Times New Roman', Times, serif; font-size: 20px;"> With a strong background in MS SQL, I specialize in database management, query optimization, and
+                    performance tuning, ensuring robust backend solutions. In front-end development, I excel in
+                    HTML, CSS, JavaScript, and React, crafting intuitive and engaging web interfaces. I seek a
+                    front-end development role to integrate my skills seamlessly, creating user-centric applications
+                    that solve real-world challenges. Passionate about innovation, I stay updated with the latest
+                    trends to deliver forward-thinking solutions. I'm eager to collaborate, network, and explore
+                    opportunities to contribute to impactful projects in the tech industry.</p>
+        </div>
+        </section>
+        <section id="about">
+            <div class="education">
+                <h2 class="ad">Education</h2>
+                <div class="institution">
+                    <h3>B.E ELECTRONICS AND COMMUNICATION ENGINEERING</h3>
+                    <p>SKCET, 2022 - 2026</p>
+                </div>
+                <div class="institution">
+                    <h3>HSC</h3>
+                    <p>Devi Matriculation, 2021- 2022</p>
+                </div>
+            </div>
+            </section>
+            <section id="ef">
+                <div class="efgh">
+                    <h2 class="ad">Skills</h2>
+                        <p style="font-family:'Times New Roman', Times, serif; font-size: 20px;">
+                                    <p style="font-family:'Times New Roman', Times, serif; font-size: 20px;"> I am proficient in programming languages such as
+                                         C++ and Java, with a solid understanding of fundamental concepts and practical applications.
+                                          My expertise extends to data structures and algorithms, where I have gained a strong grasp of
+                                           essential principles and problem-solving techniques. In addition to my technical skills, 
+                                           I possess valuable soft skills including effective communication, teamwork, and 
+                                           adaptability, which enhance my ability to collaborate on diverse projects and 
+                                           contribute to successful outcomes.
+                                    </p>
+                            </div>
+                            </section></p>
+                            <section id="ij">
+                                <div class="ijkl">
+                                    <h2 class="kl">Contact</h2>
+                                   <center><h3><b>“Let’s Connect”</b></h3><center>
+                                    <p>"Ready to start a new adventure together? Contact me and let’s create something amazing!"</p>
+                                    <a href="#">shalinisankar069@gmai.com</a><br>
+                                    <a href="#">https://github.com/VijayashaliniJ</a>
+                                </section>
+                </div>
+                </section>
+</body>
+</html>
