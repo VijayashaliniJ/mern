@@ -3,32 +3,32 @@
 <head>
     <style>
         body {
-
             font-family: Arial, sans-serif;
             
         }
         .main {
             width: 100%;
             height: 100vh;
-            position: relative;
+            
         }
         .navbar {
-            width: 86%;
+            width: 100%;
+            height: fit-content;
             display: flex;
-            margin: auto;
             padding: 15px;
             align-items: center;
             justify-content: space-between;
-            position: relative; /* Allow absolute positioning within */
+            position: relative; 
+            background-color:rgb(230, 104,59);
         }
         ul {
-            margin-top: 20px;
-            margin-left: auto;
+            margin-top: 30px;
+            margin-left: auto;  
         }
         ul li {
             list-style: none;
             display: inline-block;
-            padding: 10px;
+            padding: 10px; 
         }
         ul li a {
             font-size: 16px;
@@ -37,7 +37,8 @@
             color: darkslategray;
         }
         ul li a:hover { 
-            color: red;
+            color:white;
+
         }
         .info {
             margin-left: 10%;
@@ -54,7 +55,7 @@
             line-height: 24px;
         }
         .info span {
-            color: rgb(230, 104,59);
+           color:rgb(230, 104,59);
         }
         .info a {
             text-decoration: none;
@@ -70,7 +71,7 @@
         }
         .image {
             width: 20%;
-            height: 70%;
+            height: 50%;
             position: absolute;
             right: 250px;
             bottom: 120px; 
@@ -82,11 +83,11 @@
             left: 50%;
             top: 0;
         }
-        .education ,.abcd,.efgh{
+        .education ,.abcd,.efgh,.huge{
             width: 70%;
             margin: 20px auto; /* Center horizontally and add space from top */
             padding: 90px;
-            background-color: #f4f4f4;
+            background-color:#f4f4f4;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             position: relative; /* Changed from absolute to relative */
@@ -120,13 +121,14 @@
             color: #333;
         }
         .welcometext {
-            position: absolute;
+           
             top: 50%;
             font-size: 24px;
             font-weight: bold;
             color: darkslategray;
             background-color: linear-gradient(135deg, #f5a623, #f76c6c);;
         }
+        
     </style>
 </head>
 <body>
@@ -138,6 +140,7 @@
                 <li><a href="#ab">ABOUT</a></li> 
                 <li><a href="#ef">SKILLS</a></li>
                 <li><a href="#about">EDUCATION</a></li>
+                <li><a href="#po">PROJECTS</a></li>
                 <li><a href="#ij">CONTACT</a></li>
             </ul>
         </div>
@@ -190,6 +193,16 @@
                                     </p>
                             </div>
                             </section></p>
+                            <section id="po">
+                                <div class="huge">
+                                    <h2 class="hu">Projects</h2>
+                                        <p style="font-family:'Times New Roman', Times, serif; font-size: 20px;">
+                                                    Heart Disease prediction With the Help with the help of Retinal image using Deep learning.
+                                                    </p>
+                                            </div>
+                                            </section>
+
+
                             <section id="ij">
                                 <div class="ijkl">
                                     <h2 class="kl">Contact</h2>
