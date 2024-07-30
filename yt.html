@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <style>
+        .main {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+        }
+        .navbar {
+            width: 86%;
+            display: flex;
+            margin: auto;
+            padding: 15px ;
+            align-items: center;
+            justify-content: space-between;
+        }
+        ul {
+            margin-top: 20px;
+            margin-left: auto;
+        }
+        ul li {
+            list-style: none;
+            display: inline-block;
+            padding: 10px;
+        }
+        ul li a {
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            color: darkslategray;
+           
+        }
+        ul li a:hover { 
+            color: red;
+        }
+        .info {
+            margin-left: 10%;
+            margin-top: 10%;
+            margin-bottom: 50px; /* Space for education section */
+        }
+        .info h1 {
+            font-size: 70px;
+            color: rgb(36,32,30);
+        }
+        .info h3 {
+            font-size: 35px;
+            letter-spacing: 1px;
+            line-height: 24px;
+        }
+        .info span {
+            color: rgb(230, 104,59);
+        }
+        .info a {
+            text-decoration: none;
+            color: #fff;
+            background: rgb(36, 32,30);
+            margin: 30px 0;
+            padding: 10px;
+            border-radius: 10px;  /*resume*/
+            display: inline-block;
+        }
+        .info a:hover {
+            background: rgb(59, 174,209);
+        }
+        .image {
+            width: 20%;
+            height: 70%;
+            position: absolute;
+            right: 250px;
+            bottom: 120px; 
+        }
+        .image img {
+            position: absolute;
+            height: 400px;
+            width: 295px;
+            left: 50%;
+            top: 0;
+        }
+
+        /* New styles for education section */
+        .education {
+            width: 70%;
+            margin: 20px auto; /* Center horizontally and add space from top */
+            padding: 90px;
+            background-color: #f4f4f4;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative; /* Changed from absolute to relative */
+            z-index: 1;
+        }
+        .education h2 {
+            font-size: 36px;
+            color: rgb(36,32,30);
+            margin-bottom: 20px;
+        }
+        .education .institution {
+            margin-bottom: 20px;
+        }
+        .education .institution h3 {
+            font-size: 24px;
+            color: rgb(36,32,30);
+        }
+        .education .institution p {
+            font-size: 18px;
+            color: #333;
+        }
+      </style>
+    </head>
+    <body>
+        <div class="main">
+            <div class="navbar">
+                <ul>
+                <li><a href="">HOME</a></li>
+                <li><a href="about.html">ABOUT</a></li> 
+                <li><a href="#">SKILLS</a></li>
+                <li><a href="#">EDUCATION</a></li>
+                <li><a href="#">CONTACT</a></li>
+                </ul>
+            </div>
+            <div class="info">
+                <h3>Hi, I'm <span>Vijayashalini</span></h3>
+                <h1><span>S</span>TUDENT</h1>
+                <h3>Passionate Web Developer Specializing In HTML, CSS</h3>
+                <a href="resume\shaliniresume.pdf">Resume</a>
+            </div>
+            <div class="image">
+                <img src="images\resumeimage.jpeg">
+            </div>
+        </div>
+        <div class="education-image">
+        </div>
+        <div class="education">
+            <h2>Education</h2>
+            <div class="institution">
+                <h3>B.E ELECTRONICS AND COMMNUCATION ENGINEERING</h3>
+                <p>SKCET, 2022 - 2026</p>
+            </div>
+            <div class="institution">
+                <h3>HSC</h3>
+                <p>ABC High School, 2021- 2022</p>
+            </div>
+        </div>
+    </body>
+</html>
