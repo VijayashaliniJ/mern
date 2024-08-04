@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Builder</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            margin: 20px;
+        }
+
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 40%;
+            margin-right: 20px;
+        }
+
+        .resume-preview-container {
+            background-color: #f1f1f1;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 50%;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Resume Template */
+        #resume-template {
+            width: 100%;
+            max-width: 100%;
+            margin: 0 auto;
+            text-align: left;
+            border: 1px solid #000; /* Border for resume */
+            padding: 0.25in; /* Adjust padding to be lighter */
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+            font-size: 12px; /* Smaller font size */
+        }
+
+        #profile-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        #resume-template img {
+            width: 80px; /* Smaller profile picture */
+            height: 80px;
+            border-radius: 50%;
+            border: 2px solid #000; /* Black border for profile picture */
+        }
+
+        #name-display {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        #resume-template hr {
+            margin: 15px 0;
+            border: 0;
+            border-top: 1px solid #ddd; /* Horizontal line style */
+        }
+
+        .section {
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+        }
+
+        .section h2 {
+            margin: 0;
+            border-bottom: 2px solid #007bff; /* Underline for each topic */
+            padding-bottom: 3px;
+            font-size: 16px; /* Smaller section heading */
+        }
+
+        .contact-info {
+            margin-top: 5px;
+        }
+
+        .contact-icons {
+            display: flex;
+            gap: 5px;
+            margin-top: 5px;
+        }
+
+        .icon-link {
+            display: inline-block;
+            width: 18px; /* Adjust size as needed */
+            height: 18px;
+        }
+
+        .icon-link img {
+            width: 100%;
+            height: auto;
+            vertical-align: middle;
+        }
+
+        .contact-info i {
+            margin-right: 5px;
+        }
+
+        @page {
+            margin: 0.25in;
+        }
+    </style>
+    <!-- Add html2pdf library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h1 class="text-center">Resume Builder</h1>
+            <form id="resume-form">
+                <div class="form-group">
+                    <label for="profile-picture">Profile Picture:</label>
+                    <input type="file" id="profile-picture" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone:</label>
+                    <input type="tel" id="phone" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="linkedin">LinkedIn:</label>
+                    <input type="url" id="linkedin" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="github">GitHub:</label>
+                    <input type="url" id="github" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="objective">Objective:</label>
+                    <textarea id="objective" class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="education">Education:</label>
+                    <textarea id="education" class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="experience">Experience:</label>
+                    <textarea id="experience" class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="skills">Skills:</label>
+                    <textarea id="skills" class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="certifications">Certifications:</label>
+                    <textarea id="certifications" class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="projects">Projects:</label>
+                    <textarea id="projects" class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="languages">Languages:</label>
+                    <textarea id="languages" class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="hobbies">Hobbies:</label>
+                    <textarea id="hobbies" class="form-control"></textarea>
+                </div>
+                <button class="btn" id="generate-resume">Generate Resume</button>
+            </form>
+        </div>
+        <div class="resume-preview-container">
+            <div id="resume-template" style="display: none;">
+                <div id="profile-section">
+                    <img id="profile-picture-display" src="" alt="Profile Picture">
+                    <h1 id="name-display"></h1>
+                </div>
+                <p id="email-display"></p>
+                <p id="phone-display"></p>
+                <div id="linkedin-display" class="contact-info">
+                    <i class="fab fa-linkedin"></i> <a id="linkedin-link" href="#" target="_blank"></a>
+                </div>
+                <div id="github-display" class="contact-info">
+                    <i class="fab fa-github"></i> <a id="github-link" href="#" target="_blank"></a>
+                </div>
+                <div id="email-display" class="contact-info">
+                    <i class="fas fa-envelope"></i> <a id="email-link" href="#" target="_blank"></a>
+                </div>
+                <hr>
+                <div class="section">
+                    <h2>Objective:</h2>
+                    <p id="objective-display"></p>
+                </div>
+                <div class="section">
+                    <h2>Education:</h2>
+                    <ul id="education-list"></ul>
+                </div>
+                <div class="section">
+                    <h2>Experience:</h2>
+                    <ul id="experience-list"></ul>
+                </div>
+                <div class="section">
+                    <h2>Skills:</h2>
+                    <ul id="skills-list"></ul>
+                </div>
+                <div class="section">
+                    <h2>Certifications:</h2>
+                    <ul id="certifications-list"></ul>
+                </div>
+                <div class="section">
+                    <h2>Projects:</h2>
+                    <ul id="projects-list"></ul>
+                </div>
+                <div class="section">
+                    <h2>Languages:</h2>
+                    <ul id="languages-list"></ul>
+                </div>
+                <div class="section">
+                    <h2>Hobbies:</h2>
+                    <ul id="hobbies-list"></ul>
+                </div>
+            </div>
+            <button class="btn" id="download-resume">Download PDF</button>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const generateResumeButton = document.getElementById('generate-resume');
+            const downloadResumeButton = document.getElementById('download-resume');
+            const resumeTemplate = document.getElementById('resume-template');
+            const profilePictureInput = document.getElementById('profile-picture');
+            const profilePictureDisplay = document.getElementById('profile-picture-display');
+            
+            const nameDisplay = document.getElementById('name-display');
+            const emailDisplay = document.getElementById('email-display');
+            const phoneDisplay = document.getElementById('phone-display');
+            const linkedinLink = document.getElementById('linkedin-link');
+            const githubLink = document.getElementById('github-link');
+            const emailLink = document.getElementById('email-link');
+            const objectiveDisplay = document.getElementById('objective-display');
+            const educationList = document.getElementById('education-list');
+            const experienceList = document.getElementById('experience-list');
+            const skillsList = document.getElementById('skills-list');
+            const certificationsList = document.getElementById('certifications-list');
+            const projectsList = document.getElementById('projects-list');
+            const languagesList = document.getElementById('languages-list');
+            const hobbiesList = document.getElementById('hobbies-list');
+
+            generateResumeButton.addEventListener('click', (e) => {
+                e.preventDefault();
+
+                // Populate resume content
+                nameDisplay.textContent = document.getElementById('name').value;
+                emailDisplay.textContent = document.getElementById('email').value;
+                phoneDisplay.textContent = document.getElementById('phone').value;
+                linkedinLink.href = document.getElementById('linkedin').value;
+                linkedinLink.textContent = document.getElementById('linkedin').value;
+                githubLink.href = document.getElementById('github').value;
+                githubLink.textContent = document.getElementById('github').value;
+                emailLink.href = `mailto:${document.getElementById('email').value}`;
+                emailLink.textContent = document.getElementById('email').value;
+                objectiveDisplay.textContent = document.getElementById('objective').value;
+
+                // Handle profile picture
+                if (profilePictureInput.files && profilePictureInput.files[0]) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        profilePictureDisplay.src = e.target.result;
+                    };
+                    reader.readAsDataURL(profilePictureInput.files[0]);
+                }
+
+                // Populate lists
+                const sections = ['education', 'experience', 'skills', 'certifications', 'projects', 'languages', 'hobbies'];
+                sections.forEach(section => {
+                    const list = document.getElementById(`${section}-list`);
+                    list.innerHTML = document.getElementById(section).value.split('\n').map(item => `<li>${item}</li>`).join('');
+                });
+
+                resumeTemplate.style.display = 'block';
+            });
+
+            downloadResumeButton.addEventListener('click', () => {
+                const opt = {
+                    margin: [0.25, 0.25], // Adjust margins to provide space for borders
+                    filename: 'resume.pdf',
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: { scale: 2 },
+                    jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+                };
+
+                html2pdf().from(resumeTemplate).set(opt).save();
+            });
+        });
+    </script>
+</body>
+</html>
