@@ -3,7 +3,9 @@
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <link rel="stylesheet" href="/styles.css">
-    <title>Resume Wizard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <title>Resume Builder</title>
     <style>
         @import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
 
@@ -35,14 +37,18 @@
             color: #044450;
         }
 
-        .personal-info{
-           position: absolute;
-           top: 10%; 
-           right:30%;
+        .personal-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: left;
         }
-        
+
+        .personal-info .text-info {
+            margin-left: 20px;
+        }
+
         .section {
-            
             margin-bottom: 20px;
         }
 
@@ -116,24 +122,33 @@
         .text-center {
             color: #000;
         }
-        .text-center1{
+        .text-center1 {
             position: relative;
-            left: 10%;
             color: #000;
+            display: flex;
+            justify-content: center;
         }
         .social-links {
             display: flex;
             flex-direction: column;
             justify-content: space-around;
             margin-top: 20px;
+            width: 20rem;
+            margin: auto;
         }
+
         .social-links p {
-            border: 1px solid #ddd;
             padding: 10px;
-            border-radius: 5px;
-            background-color: #f9f9f9;
             color: #044450;
             font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .social-links i {
+            margin-right: 10px;
+            color: #044450;
+            font-size: 20px; /* Adjust size as needed */
         }
 
         .resume-template-hr {
@@ -141,16 +156,34 @@
             border-top: 3px solid #044450;
             margin: 20px 0;
         }
+
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+
+            #resume-template,
+            #resume-template * {
+                visibility: visible;
+            }
+
+            #resume-template {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
 
     <div class="container shadow p-5 mb-5 bg-white rounded" id="resume-form">
-        <h1 class="text-center" style="font-size: 80px; font-weight: 800; color: #044450;"> Resume Builder</h1>
+        <h1 class="text-center" style="font-size: 80px; font-weight: 800; color: #044450;">Resume Builder</h1>
         <p class="text-center" style="font-size: 20px; font-weight: bold; color: #0b1e2d;">Create your Future here!.</p>
         
         <div class="row">
-            <!-- Personal details column-->
+            <!-- Personal details column -->
             <div class="col-md-6">
                 <h1>Personal Information</h1>
                 <hr>
@@ -202,47 +235,53 @@
                     <label for="objField">Objective</label>
                     <textarea class="form-control" id="objField" rows="3"></textarea>
                 </div>
-                <div class="form-group mt-4" id="we" >
-                    <label for="">Skills</label>
-                    <textarea class="form-control weField" rows="3"></textarea>
-                    <div class="container" id="weAddButton">
-                        <button class="btn-add mt-2" onclick="addNewField1()">Add</button>
+                <div class="form-group mt-4" id="skills">
+                    <label for="skillsField">Skills</label>
+                    <textarea class="form-control skillsField" rows="3"></textarea>
+                    <div class="container" id="skillsAddButton">
+                        <button class="btn-add mt-2" onclick="addNewField('skills')">Add</button>
                     </div>
                 </div>
-                <div class="form-group mt-4" id="ed" >
-                    <label for="">Education</label>
-                    <textarea class="form-control edField" rows="3"></textarea>
-                    <div class="container" id="edAddButton">
-                        <button class="btn-add mt-2" onclick="addNewField2()">Add</button>
+                <div class="form-group mt-4" id="work">
+                    <label for="workField">Work Experience</label>
+                    <textarea class="form-control workField" rows="3"></textarea>
+                    <div class="container" id="workAddButton">
+                        <button class="btn-add mt-2" onclick="addNewField('work')">Add</button>
                     </div>
                 </div>
-                <div class="form-group mt-4" id="ce" >
-                    <label for="">Certifications</label>
-                    <textarea class="form-control ceField" rows="3"></textarea>
-                    <div class="container" id="ceAddButton">
-                        <button class="btn-add mt-2" onclick="addNewField3()">Add</button>
+                <div class="form-group mt-4" id="education">
+                    <label for="educationField">Education</label>
+                    <textarea class="form-control educationField" rows="3"></textarea>
+                    <div class="container" id="educationAddButton">
+                        <button class="btn-add mt-2" onclick="addNewField('education')">Add</button>
+                    </div>
+                </div>
+                <div class="form-group mt-4" id="certifications">
+                    <label for="certificationsField">Certifications</label>
+                    <textarea class="form-control certificationsField" rows="3"></textarea>
+                    <div class="container" id="certificationsAddButton">
+                        <button class="btn-add mt-2" onclick="addNewField('certifications')">Add</button>
                     </div>
                 </div>
             </div>
-            <div class="container mt-4 text-center">
-                <button class="btn-add" onclick="generateCv()">Generate CV</button>
-            </div>
+        </div>
+        <div class="text-center mt-4">
+            <button id="generateResume" class="btn-primary" onclick="generateResume()">Generate Resume</button>
+        </div>
+        <div class="text-center mt-4">
+            <button id="printResume" class="btn-primary" onclick="window.print()">Print Resume</button>
         </div>
     </div>
 
     <div class="container mt-5" id="resume-template">
-        <div class="text-center1">
+        <div class="personal-info">
             <img id="imgT" src="#" alt="Profile Picture" class="img-logo">
-            <h1 id="nameT1"></h1>
-            <p id="contactT"></p>
-            <p id="emailT"></p>
-            <p id="addT1"></p>
-        </div>
-        <div class="social-links text-center">
-            <p id="lkT"></p>
-            <p id="gitT"></p>
-            <p id="fbT"></p>
-            <p id="stT"></p>
+            <div class="text-info">
+                <h1 id="nameT1"></h1>
+                <p id="contactT"></p>
+                <p id="emailT"></p>
+                <p id="addT1"></p>
+            </div>
         </div>
         <div class="section">
             <h2>Objective</h2>
@@ -250,19 +289,30 @@
             <hr class="resume-template-hr">
         </div>
         <div class="section">
-            <h2>Skills</h2>
-            <ul id="weT"></ul>
+            <h2>TECHNICAL Skills</h2>
+            <ul id="skillsT"></ul>
+            <hr class="resume-template-hr">
+        </div>
+        <div class="section">
+            <h2>Soft Skills</h2>
+            <ul id="workT"></ul>
             <hr class="resume-template-hr">
         </div>
         <div class="section">
             <h2>Education</h2>
-            <ul id="edT"></ul>
+            <ul id="educationT"></ul>
             <hr class="resume-template-hr">
         </div>
         <div class="section">
             <h2>Certifications</h2>
-            <ul id="cerT"></ul>
+            <ul id="certificationsT"></ul>
             <hr class="resume-template-hr">
+        </div>
+        <div class="social-links text-center1">
+            <p><i class="fab fa-linkedin"></i> <span id="lkT"></span></p>
+            <p><i class="fab fa-github"></i> <span id="gitT"></span></p>
+            <p><i class="fab fa-hacker-news"></i> <span id="fbT"></span></p>
+            <p><i class="fas fa-globe"></i> <span id="stT"></span></p>
         </div>
         <div class="text-center mt-4">
             <button id="downloadCV" class="btn-primary">Download CV</button>
@@ -270,92 +320,61 @@
     </div>
 
     <script>
-        function addNewField1() {
-            let newNode = document.createElement('textarea');
-            newNode.classList.add('form-control', 'weField', 'mt-2');
-            newNode.setAttribute('rows', 3);
-            let weOb = document.getElementById('we');
-            let weAddButtonOb = document.getElementById('weAddButton');
-            weOb.insertBefore(newNode, weAddButtonOb);
+        function addNewField(section) {
+            const container = document.getElementById(`${section}AddButton`);
+            const field = document.querySelector(`.${section}Field`);
+            const newField = document.createElement('li');
+            newField.textContent = field.value;
+            document.getElementById(`${section}T`).appendChild(newField);
+            field.value = ''; // Clear the textarea
         }
 
-        function addNewField2() {
-            let newNode = document.createElement('textarea');
-            newNode.classList.add('form-control', 'edField', 'mt-2');
-            newNode.setAttribute('rows', 3);
-            let edOb = document.getElementById('ed');
-            let edAddButtonOb = document.getElementById('edAddButton');
-            edOb.insertBefore(newNode, edAddButtonOb);
-        }
+        function generateResume() {
+            document.getElementById('resume-template').style.display = 'block';
+            document.getElementById('nameT1').textContent = document.getElementById('nameField').value;
+            document.getElementById('contactT').textContent = document.getElementById('contactField').value;
+            document.getElementById('emailT').textContent = document.getElementById('emailField').value;
+            document.getElementById('addT1').textContent = document.getElementById('addressField').value;
+            document.getElementById('objectiveT').textContent = document.getElementById('objField').value;
 
-        function addNewField3() {
-            let newNode = document.createElement('textarea');
-            newNode.classList.add('form-control', 'ceField', 'mt-2');
-            newNode.setAttribute('rows', 3);
-            let ceOb = document.getElementById('ce');
-            let ceAddButtonOb = document.getElementById('ceAddButton');
-            ceOb.insertBefore(newNode, ceAddButtonOb);
-        }
+            const sections = ['skills', 'work', 'education', 'certifications'];
+            sections.forEach(section => {
+                const list = document.getElementById(`${section}T`);
+                list.innerHTML = ''; // Clear existing items
+                const items = document.querySelectorAll(`.${section}Field`);
+                items.forEach(item => {
+                    item.value.split('\n').forEach(text => {
+                        if (text.trim()) {
+                            const li = document.createElement('li');
+                            li.textContent = text;
+                            list.appendChild(li);
+                        }
+                    });
+                });
+            });
 
-        function generateCv() {
-            document.getElementById('nameT1').innerHTML = document.getElementById('nameField').value;
-            document.getElementById('contactT').innerHTML = document.getElementById('contactField').value;
-            document.getElementById('emailT').innerHTML = document.getElementById('emailField').value;
-            document.getElementById('addT1').innerHTML = document.getElementById('addressField').value;
-            document.getElementById('lkT').innerHTML = document.getElementById('linkedinField').value;
-            document.getElementById('gitT').innerHTML = document.getElementById('gitField').value;
-            document.getElementById('fbT').innerHTML = document.getElementById('fbField').value;
-            document.getElementById('stT').innerHTML = document.getElementById('stField').value;
-            document.getElementById('objectiveT').innerHTML = document.getElementById('objField').value;
+            document.getElementById('lkT').textContent = document.getElementById('linkedinField').value;
+            document.getElementById('gitT').textContent = document.getElementById('gitField').value;
+            document.getElementById('fbT').textContent = document.getElementById('fbField').value;
+            document.getElementById('stT').textContent = document.getElementById('stField').value;
 
-            let workExps = document.getElementsByClassName('weField');
-            let weStr = '';
-            for (let e of workExps) {
-                weStr += `<li> ${e.value} </li>`;
-            }
-            document.getElementById('weT').innerHTML = weStr;
-
-            let eduQua = document.getElementsByClassName('edField');
-            let edStr = '';
-            for (let e of eduQua) {
-                edStr += `<li> ${e.value} </li>`;
-            }
-            document.getElementById('edT').innerHTML = edStr;
-
-            let cerT = document.getElementsByClassName('ceField');
-            let cerStr = '';
-            for (let e of cerT) {
-                cerStr += `<li> ${e.value} </li>`;
-            }
-            document.getElementById('cerT').innerHTML = cerStr;
-
-            let file = document.getElementById('imgField').files[0];
-            if (file) {
-                let reader = new FileReader();
-                reader.readAsDataURL(file);
-                reader.onloadend = function () {
-                    document.getElementById('imgT').src = reader.result;
-                };
-            }
-
+            // Hide form and other elements
             document.getElementById('resume-form').style.display = 'none';
+            document.getElementById('generateResume').style.display = 'none';
             document.getElementById('resume-template').style.display = 'block';
         }
 
-        window.onload = function() {
-            document.getElementById('downloadCV').addEventListener("click", () => {
-                const resumePDF = document.getElementById("resume-template");
-                var opt = {
-                    margin:       0.5,
-                    filename:     'myfile.pdf',
-                    image:        { type: 'jpeg', quality: 1 },
-                    html2canvas:  { scale: 2 },
-                    jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
-                };
-                html2pdf().from(resumePDF).set(opt).save();
-            });
-        }
+        document.getElementById('downloadCV').addEventListener('click', function() {
+            const element = document.getElementById('resume-template');
+            const opt = {
+                margin: 1,
+                filename: 'resume.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            html2pdf().from(element).set(opt).save();
+        });
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
 </body>
 </html>
